@@ -13,11 +13,22 @@ class Table extends Component {
 		const name = this.refs.name.value;
 		const email = this.refs.email.value;
 		const phone = this.refs.phone.value;
+		if(name, email, phone === "") {
+			alert("Please add something..")
+		} else {
 		console.log("getData is running: ", name, email, phone);
 		let data = Data;
 		data.unshift({ name: name, email: email, phone });
 		this.setState({ data: data })
+		this.refs.name.value = "";
+		this.refs.email.value = "";
+		this.refs.phone.value = "";
 	}
+}
+removeItem() {
+	console.log("remove button is functioning properly")
+	this.state.data.splice(1, 3);
+}
 	render() {
 
 		let myData = this.state.data.map((res, i) => {
@@ -26,6 +37,12 @@ class Table extends Component {
 				<td>{res.name}</td>
 				<td>{res.email}</td>
 				<td>{res.phone}</td>
+				<td>
+					<button className="glyphicon glyphicon-pencil "></button>
+					<button className="glyphicon glyphicon-trash " onClick={() => this.removeItem()}></button>
+				</td>
+
+
 
 			</tr>)
 		})
@@ -39,9 +56,9 @@ class Table extends Component {
 							<div className="well">
 								<form className="form-inline" role="form">
 									<div className="form-group " >
-										<input type="name" className="form-control" ref="name" placeholder="Enter name" required/>
-										<input type="name" className="form-control" ref="email" placeholder="Enter email" required/>
-										<input type="name" className="form-control" ref="phone" placeholder="Enter phone" required/>
+										<input type="name" className="form-control" ref="name" placeholder="Full name" />
+										<input type="name" className="form-control" ref="email" placeholder="E-mail address" />
+										<input type="name" className="form-control" ref="phone" placeholder="Phone number" />
 									</div>
 									<button className="btn btn-default" onClick={(event) => { this.getData(event) }}>Add new</button>
 								</form>
