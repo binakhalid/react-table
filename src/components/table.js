@@ -25,21 +25,29 @@ class Table extends Component {
 		this.refs.phone.value = "";
 	}
 }
-removeItem() {
-	console.log("remove button is functioning properly")
-	this.state.data.splice(1, 3);
+editItem(i) {
+	let data = this.state.data.map((res, i) => {
+		return res
+	})
+	console.log(data)
+}
+removeItem(i) {
+	console.log(i)
+	this.state.data.splice(i, 1);
+this.setState({
+	data: this.state.data
+})
 }
 	render() {
 
 		let myData = this.state.data.map((res, i) => {
 			return (<tr key={i}>
-
 				<td>{res.name}</td>
 				<td>{res.email}</td>
 				<td>{res.phone}</td>
 				<td>
-					<button className="glyphicon glyphicon-pencil "></button>
-					<button className="glyphicon glyphicon-trash " onClick={() => this.removeItem()}></button>
+					<button className="glyphicon glyphicon-pencil "  onClick={() => this.editItem(i)}></button>
+					<button className="glyphicon glyphicon-trash " onClick={() => this.removeItem(i)}></button>
 				</td>
 
 
