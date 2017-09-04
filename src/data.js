@@ -9,7 +9,7 @@ let Data  = [
 { id: 2,
  name: "Brin",
  email: "brin.yans@gmail.com",
- phone:45478975
+ phone:45478976
 },
 { id: 3,
  name: "Alex",

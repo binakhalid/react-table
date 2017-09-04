@@ -4,7 +4,7 @@ import Data from '../data';
 class Table extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { data: Data }
+		this.state = { data: Data, button: false }
 
 	}
 
@@ -13,24 +13,39 @@ class Table extends Component {
 		const name = this.refs.name.value;
 		const email = this.refs.email.value;
 		const phone = this.refs.phone.value;
-		if (name, email, phone === "") {
+		if (name === "", email === "", phone === "") {
 			alert("Please add something..")
 		} else {
 			console.log("getData is running: ", name, email, phone);
 			let data = Data;
-			data.unshift({ name: name, email: email, phone });
+			data.unshift({ name: name, email: email, phone: phone });
 			this.setState({ data: data })
 			this.refs.name.value = "";
 			this.refs.email.value = "";
 			this.refs.phone.value = "";
+			this.refs.button.value = "Submit"
 		}
 	}
 	editItem(i) {
 		let data = this.state.data.map((res, i) => {
 			return res
 		})
-		console.log(data)
-	}
+		this.state.data.splice(i,1);
+		this.setState({
+			data:this.state.data,
+			button: true
+		})
+		// var array = [1,2,3,4,5];
+		// var indexNumber;
+		// indexNumber = array[0] // 1
+		let name = data[i].name;
+		let email = data[i].email;
+		let phone = data[i].phone;
+		this.refs.name.value = name;
+		this.refs.email.value = email;
+		this.refs.phone.value = phone;
+		this.refs.button.value = "SAVE"
+}
 	removeItem(i) {
 		console.log(i)
 		this.state.data.splice(i, 1);
@@ -49,9 +64,6 @@ class Table extends Component {
 					<button className="glyphicon glyphicon-pencil " onClick={() => this.editItem(i)}></button>
 					<button className="glyphicon glyphicon-trash " onClick={() => this.removeItem(i)}></button>
 				</td>
-
-
-
 			</tr>)
 		})
 		return (
@@ -62,42 +74,36 @@ class Table extends Component {
 						<nav className="navbar navbar-light bg-faded ">
 							<h1 className="navbar-brand mb-0  ">Nord Software</h1>
 						</nav>
-<table>
-						<tbody className=" table-nonfluid">
-							<tr className="new table-nonfluid" id="new">
-								<td>
-									<input type="text" required ref="name" className="form-control" />
-								</td>
-								<td>
-									<input type="text" required ref="email" className="form-control" />
-								</td>
-								<td>
-									<input type="text" required ref="phone" className="form-control" />
-								</td>
-
-								<td>
-									<button className="btn btn-default" onClick={(event) => { this.getData(event) }}>Add new</button>
-								</td>
-							</tr>
-							<tr>
-
-
-								<th className="text-center">Name</th>
-								<th className="text-center">Email</th>
-								<th className="text-center">phone</th>
-
-							</tr>
-
-						</tbody>
-						</table>
-
-
 						<table className="table table-bordered">
+							<thead>
 
+							<tr>
+									<th >Name</th>
+									<th >Email</th>
+									<th >phone</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+					
 							<tbody>
+								<tr>
+									<td>
+										<input type="name"  ref="name"  className="form-control" data-align="center" required />
+							</td>
+									<td>
+										<input type="name"  ref="email" className="form-control" data-align="center" required />
+									</td>
+									<td>
+										<input type="name"  ref="phone" className="form-control" data-align="center" required />
+									</td>
+									<td>
+										<input className="btn btn-default" type="submit" onClick={(event) => { this.getData(event) }} ref="button" />
+									</td>
+								</tr>
+								
 								{myData}
-
 							</tbody>
+						
 						</table>
 					</div>
 				</div>
