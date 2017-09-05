@@ -83,28 +83,34 @@ class Table extends Component {
 									<th >phone</th>
 									<th>Actions</th>
 								</tr>
+								
 							</thead>
-					
+				
 							<tbody>
+							
 								<tr>
+						
 									<td>
-										<input type="name"  ref="name"  className="form-control" data-align="center" required />
+										<input type="name"  ref="name" placeholder="Full name" className="form-control" data-align="center" required />
 							</td>
 									<td>
-										<input type="name"  ref="email" className="form-control" data-align="center" required />
+										<input type="email" id="inputEmail"   ref="email"  placeholder="E-mail address" className="form-control" data-align="center" required />
 									</td>
 									<td>
-										<input type="name"  ref="phone" className="form-control" data-align="center" required />
+										<input type="number"  min="0" data-bind="value:replyNumber"  ref="phone" placeholder="Phone number" className="form-control" data-align="center" required />
 									</td>
 									<td>
 										<input className="btn btn-default" type="submit" onClick={(event) => { this.getData(event) }} ref="button" />
 									</td>
+								
 								</tr>
+									
 								
 								{myData}
 							</tbody>
 						
 						</table>
+					
 					</div>
 				</div>
 			</div>
